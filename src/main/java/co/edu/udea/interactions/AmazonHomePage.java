@@ -21,9 +21,7 @@ public class AmazonHomePage implements Interaction {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Enter.theValue("VIZIO TV").into(SEARCH_INPUT).thenHit(Keys.RETURN),
-                Click.on(ITEM_LIST),
-                Click.on(ADD_TO_CART_BUTTON)
+
         );
     }
 

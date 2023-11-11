@@ -20,7 +20,7 @@ public class OpenThe implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(Open.browserOn(page), AmazonHomePage.go(driver));
+        actor.attemptsTo(Open.browserOn(page));
     }
 
     public static OpenThe Browser(PageObject page, WebDriver driver) {
