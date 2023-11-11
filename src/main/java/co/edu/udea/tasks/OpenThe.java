@@ -1,6 +1,5 @@
 package co.edu.udea.tasks;
 
-import co.edu.udea.interactions.AmazonHomePage;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
@@ -11,19 +10,17 @@ import org.openqa.selenium.WebDriver;
 public class OpenThe implements Task {
 
     private PageObject page;
-    private WebDriver driver;
 
-    public OpenThe(PageObject page, WebDriver driver) {
+    public OpenThe(PageObject page) {
         this.page = page;
-        this.driver = driver;
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(Open.browserOn(page), AmazonHomePage.go(driver));
+        actor.attemptsTo(Open.browserOn(page));
     }
 
-    public static OpenThe Browser(PageObject page, WebDriver driver) {
-        return Tasks.instrumented(OpenThe.class, page, driver);
+    public static OpenThe Browser(PageObject page) {
+        return Tasks.instrumented(OpenThe.class, page);
     }
 }

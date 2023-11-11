@@ -14,6 +14,9 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
 
+import static co.edu.udea.interactions.AddToCartInteraction.addToCart;
+import static co.edu.udea.interactions.ClickItemInteraction.clickItem;
+import static co.edu.udea.interactions.SeachValueInteraction.enterValue;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -38,21 +41,22 @@ public class AddItemToCartStepDefinitions {
     @Given("que estoy en la homepage de Amazon")
     public void queEstoyEnLaHomepageDeAmazon() {
         client.can(BrowseTheWeb.with(driver));
+        client.attemptsTo(OpenThe.Browser(new AmazonPage()));
     }
 
     @When("busque un item en la barra de busqueda")
     public void busqueUnItemEnLaBarraDeBusqueda() {
-        client.attemptsTo(OpenThe.Browser(new AmazonPage(), driver));
+        client.attemptsTo(enterValue());
     }
 
     @And("entre al primer item")
     public void entreAlPrimerItem() {
-
+        client.attemptsTo(clickItem());
     }
 
     @And("de click al boton de Agregar al carrito")
     public void deClickAlBotonDeAgregarAlCarrito() {
-
+        client.attemptsTo(addToCart());
     }
 
     @Then("el icono del carrito debe tener un 1")
