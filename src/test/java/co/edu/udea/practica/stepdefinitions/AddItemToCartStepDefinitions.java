@@ -41,7 +41,7 @@ public class AddItemToCartStepDefinitions {
     @Given("que estoy en la homepage de Amazon")
     public void queEstoyEnLaHomepageDeAmazon() {
         client.can(BrowseTheWeb.with(driver));
-        client.attemptsTo(OpenThe.Browser(new AmazonPage(), driver));
+        client.attemptsTo(OpenThe.Browser(new AmazonPage()));
     }
 
     @When("busque un item en la barra de busqueda")
