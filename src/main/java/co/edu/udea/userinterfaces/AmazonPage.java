@@ -14,4 +14,7 @@ public class AmazonPage extends PageObject {
             .locatedBy("//*[@id='add-to-cart-button']");
     public static final Target CART_ITEMS_NUMBER = the("Number of item in cart")
             .locatedBy("//*[@id='nav-cart-count']");
+
+    public static final Target SECOND_ITEM_LIEST = the("Second item list")
+            .locatedBy("/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[2]/div/div/div/div/div/div[2]/div/div/div[1]/h2/a");
 }

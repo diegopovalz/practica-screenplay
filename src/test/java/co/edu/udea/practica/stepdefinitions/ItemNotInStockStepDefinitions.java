@@ -1,6 +1,6 @@
 package co.edu.udea.practica.stepdefinitions;
 
-import co.edu.udea.questions.ItemInCartValidation;
+import co.edu.udea.interactions.SecondClickItemInteraction;
 import co.edu.udea.tasks.OpenThe;
 import co.edu.udea.userinterfaces.AmazonPage;
 import io.cucumber.java.After;
@@ -14,18 +14,17 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
 
-import static co.edu.udea.interactions.AddToCartInteraction.addToCart;
-import static co.edu.udea.interactions.ClickItemInteraction.clickItem;
 import static co.edu.udea.interactions.SeachValueInteraction.enterValue;
+import static co.edu.udea.interactions.SecondClickItemInteraction.clickItem;
+import static co.edu.udea.questions.ButtonNotDisplayValidation.buttonNotDisplayed;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class AddItemToCartStepDefinitions {
-
+public class ItemNotInStockStepDefinitions {
     @Managed(driver = "chrome")
     public WebDriver driver;
 
-    private Actor client = Actor.named("Cliente");
+    private Actor client = Actor.named("Cliente2");
 
     @Before
     public void setup() {
@@ -38,29 +37,24 @@ public class AddItemToCartStepDefinitions {
         driver.quit();
     }
 
-    @Given("que estoy en la homepage de Amazon")
-    public void queEstoyEnLaHomepageDeAmazon() {
+    @Given("que estoy en la pagina inicial")
+    public void queEstoyEnLaPaginaInicial() {
         client.can(BrowseTheWeb.with(driver));
         client.attemptsTo(OpenThe.Browser(new AmazonPage()));
     }
 
-    @When("busque un item en la barra de busqueda")
-    public void busqueUnItemEnLaBarraDeBusqueda() {
-        client.attemptsTo(enterValue("VIZIO TV"));
+    @When("busque un item que no esta en stock")
+    public void busqueUnItemQueNoEstaEnStock() {
+        client.attemptsTo(enterValue("GIGABYTE GeForce RTX 3070 Gaming OC 8G (REV2.0) Graphics Card, 3X WINDFORCE Fans, LHR, 8GB 256-bit GDDR6, GV-N3070GAMING OC-8GD Video Card"));
     }
 
-    @And("entre al primer item")
-    public void entreAlPrimerItem() {
+    @And("entre al primer item de la lista")
+    public void entreAlPrimerItemDeLaLista() {
         client.attemptsTo(clickItem());
     }
 
-    @And("de click al boton de Agregar al carrito")
-    public void deClickAlBotonDeAgregarAlCarrito() {
-        client.attemptsTo(addToCart());
-    }
-
-    @Then("el icono del carrito debe tener un 1")
-    public void elIconoDelCarritoDebeTenerUn1() {
-        client.should(seeThat(ItemInCartValidation.itemInCartCount(), equalTo(true)));
+    @Then("no debe aparecer el boton de agregar al carrito")
+    public void noDebeAparecerElBotonDeAgregarAlCarrito() {
+        client.should(seeThat(buttonNotDisplayed(driver), equalTo(true)));
     }
 }

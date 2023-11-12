@@ -5,7 +5,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.questions.Text;
 
-public class Validation implements Question<Boolean> {
+public class ItemInCartValidation implements Question<Boolean> {
 
     private static final String EXPECTED_NUMBER = "1";
 
@@ -16,7 +16,7 @@ public class Validation implements Question<Boolean> {
         return validationText.equals(EXPECTED_NUMBER);
     }
 
-    public static Validation theCartCount() {
-        return new Validation();
+    public static ItemInCartValidation itemInCartCount() {
+        return new ItemInCartValidation();
     }
 }

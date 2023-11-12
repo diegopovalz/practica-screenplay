@@ -9,14 +9,21 @@ import org.openqa.selenium.Keys;
 import static co.edu.udea.userinterfaces.AmazonPage.SEARCH_INPUT;
 
 public class SeachValueInteraction  implements Interaction {
+
+    private String searchTerm;
+
+    public SeachValueInteraction(String searchTerm) {
+        this.searchTerm = searchTerm;
+    }
+
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Enter.theValue("VIZIO TV").into(SEARCH_INPUT).thenHit(Keys.RETURN)
+                Enter.theValue(searchTerm).into(SEARCH_INPUT).thenHit(Keys.RETURN)
         );
     }
 
-    public static SeachValueInteraction enterValue() {
-        return Tasks.instrumented(SeachValueInteraction.class);
+    public static SeachValueInteraction enterValue(String searchTerm) {
+        return Tasks.instrumented(SeachValueInteraction.class, searchTerm);
     }
 }
